@@ -65,7 +65,7 @@ class UserSeeder extends Seeder {
                         $email = strtolower("$first_name.$last_name@example.com");
 
                         return [
-                            'status'            => UserStatus::Active,
+                            'status'            => $sequence->index % 10 == 1 ? UserStatus::Inactive : UserStatus::Active,
                             'first_name'        => $first_name,
                             'middle_name'       => $dummy_user['middle_name'],
                             'last_name'         => $last_name,
