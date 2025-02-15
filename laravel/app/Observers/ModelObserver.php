@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Enums\ActivityLogActions;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +20,7 @@ class ModelObserver {
         activity('db-operations')
             ->performedOn($model)
             ->causedBy(auth()->user())
-            ->log('created');
+            ->log(ActivityLogActions::Created->value);
     }
 
     public function updating(Model $model): Model {
@@ -31,7 +32,7 @@ class ModelObserver {
             ->performedOn($model)
             ->causedBy(auth()->user())
             ->withProperty('old', $model->getOriginal())
-            ->log('updated');
+            ->log(ActivityLogActions::Updated->value);
     }
 
     public function deleted(Model $model): void {
@@ -39,6 +40,6 @@ class ModelObserver {
         activity('db-operations')
             ->performedOn($model)
             ->causedBy(auth()->user())
-            ->log('deleted');
+            ->log(ActivityLogActions::Deleted->value);
     }
 }
