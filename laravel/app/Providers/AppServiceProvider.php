@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Patient;
 use App\Models\User;
 use App\Observers\ModelObserver;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
 
         // Register observers.
         User::observe([
+           ModelObserver::class
+        ]);
+        Patient::observe([
            ModelObserver::class
         ]);
     }

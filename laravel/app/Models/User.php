@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\UserRole;
 use Database\Factories\UserFactory;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -13,6 +14,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,10 +29,6 @@ class User extends Base implements
     public function __construct(array $attributes = []) {
         parent::__construct($attributes);
     }
-
-    protected $appends = [
-        'full_name'
-    ];
 
     /**
      * Get the attributes that should be cast.
@@ -66,11 +64,26 @@ class User extends Base implements
         'remember_token',
     ];
 
+    /**
+     * Attributes
+     * @var string[]
+     */
+    protected $appends = [
+        'full_name'
+    ];
+
     public function fullName() : Attribute {
         return Attribute::make(
             get: function($value, $attribute) {
                 return $attribute['first_name']." ".$attribute['last_name'];
             }
         );
+    }
+
+    /**
+     * Relationships
+     */
+    public function patient(): HasOne {
+        return $this->hasOne(Patient::class);
     }
 }
