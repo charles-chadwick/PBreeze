@@ -36,7 +36,7 @@ class ContactController extends Controller {
      * Display the specified resource.
      */
     public function show(Contact $contact) {
-        //
+        return $contact->load('user');
     }
 
     /**
@@ -51,6 +51,6 @@ class ContactController extends Controller {
      * Remove the specified resource from storage.
      */
     public function destroy(Contact $contact) {
-        //
+        return $contact->delete();
     }
 }
