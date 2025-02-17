@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -85,5 +86,9 @@ class User extends Base implements
      */
     public function patient(): HasOne {
         return $this->hasOne(Patient::class);
+    }
+
+    public function contacts() : MorphMany {
+        return $this->morphMany(Contact::class, 'user', 'on', 'on_id');
     }
 }
