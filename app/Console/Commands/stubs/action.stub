@@ -1,0 +1,11 @@
+<?php
+
+namespace {{ namespace }};
+use Illuminate\Http\Request;
+
+trait {{ class }}
+{
+    public function handle(Request $request) {
+
+    }
+}
