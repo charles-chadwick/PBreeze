@@ -21,8 +21,12 @@ class AppServiceProvider extends ServiceProvider {
      * Bootstrap any application services.
      */
     public function boot(): void {
+
         // @TODO: remove this once auth is properly implemented
-        Auth::loginUsingId(1);
+        if (!app()->runningInConsole()) {
+            Auth::loginUsingId(1);
+        }
+
 
         // Register observers.
         User::observe([
