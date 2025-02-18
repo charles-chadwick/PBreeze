@@ -5,6 +5,7 @@ namespace App\Models;
 use AllowDynamicProperties;
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -102,12 +103,17 @@ class Base extends Model {
             ->diffForHumans();
     }
 
-    public function scopeSort(\Illuminate\Contracts\Database\Eloquent\Builder $query, Request $request) {
+    /**
+     * Sort a query by a single field
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeSort(Builder $query) {
         /**
          * What needs to happen? We have to see if the sort variable is present
          * IF not, choose the first out of the $sort array
          */
-        $query->orderBy($request->get("sort", array_key_first($this->sort)), $request->get('dir', 'ASC'));
+        $query->orderBy(request("sort", array_key_first($this->sort)), request('dir', 'ASC'));
         return $query;
     }
 }

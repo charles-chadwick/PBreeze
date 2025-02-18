@@ -30,7 +30,7 @@ class UserController extends Controller {
 
         return User::whereIn('role', collect($where_in))
             ->with($relationships)
-            ->sort(request())
+            ->sort()
             ->get();
 
     }
