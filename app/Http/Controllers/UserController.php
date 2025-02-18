@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Users\CreateUserAction;
 use App\Actions\Users\UpdateUserAction;
 use App\Enums\UserRole;
-use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -37,10 +37,11 @@ class UserController extends Controller {
 
     /**
      * Store the user
-     * @param StoreUserRequest $request
+     *
+     * @param UserRequest $request
      * @return User
      */
-    public function store(StoreUserRequest $request, CreateUserAction $createUserAction): User {
+    public function store(UserRequest $request, CreateUserAction $createUserAction): User {
 
         return $createUserAction->handle($request);
     }
@@ -51,7 +52,7 @@ class UserController extends Controller {
      * @param User $user
      * @return User
      */
-    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $updateUserAction): User {
+    public function update(UserRequest $request, User $user, UpdateUserAction $updateUserAction): User {
 
         return $updateUserAction->handle($user, $request);
     }
