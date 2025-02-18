@@ -105,14 +105,11 @@ class Base extends Model {
 
     /**
      * Sort a query by a single field
+     * @todo Exception if $this->sort is empty
      * @param Builder $query
      * @return Builder
      */
-    public function scopeSort(Builder $query) {
-        /**
-         * What needs to happen? We have to see if the sort variable is present
-         * IF not, choose the first out of the $sort array
-         */
+    public function scopeSort(Builder $query): Builder {
         $query->orderBy(request("sort", array_key_first($this->sort)), request('dir', 'ASC'));
         return $query;
     }
