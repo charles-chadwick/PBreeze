@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Contacts\CreateContact;
 use App\Actions\Contacts\UpdateContact;
-use App\Http\Requests\StoreContactRequest;
+use App\Http\Requests\ContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 use App\Models\Contact;
 use App\Models\User;
@@ -31,11 +31,11 @@ class ContactController extends Controller {
     /**
      * Store a newly created contact in storage.
      *
-     * @param StoreContactRequest $request
+     * @param ContactRequest $request
      * @param CreateContact $createContact
      * @return Contact
      */
-    public function store(StoreContactRequest $request, CreateContact $createContact): Contact {
+    public function store(ContactRequest $request, CreateContact $createContact): Contact {
         return $createContact->handle($request);
     }
 
@@ -52,12 +52,12 @@ class ContactController extends Controller {
     /**
      * Update the specified contact in storage.
      *
-     * @param UpdateContactRequest $request
+     * @param ContactRequest $request
      * @param Contact $contact
      * @param UpdateContact $updateContact
      * @return bool|null
      */
-    public function update(UpdateContactRequest $request, Contact $contact, UpdateContact $updateContact): ?bool {
+    public function update(ContactRequest $request, Contact $contact, UpdateContact $updateContact): ?bool {
         return $updateContact->handle($request, $contact);
     }
 

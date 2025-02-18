@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateContactRequest extends FormRequest {
+class ContactRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -24,6 +24,8 @@ class UpdateContactRequest extends FormRequest {
         return [
             'type'      => ['required', Rule::in(ContactType::cases())],
             'title'     => ['required', 'max:255'],
+            'on'        => ['required'],
+            'on_id'     => ['required', 'integer'],
             'address_1' => ['min:3', 'max:255'],
             'address_2' => ['min:3', 'max:255'],
             'city'      => ['min:3', 'max:255'],
