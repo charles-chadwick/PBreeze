@@ -1,0 +1,30 @@
+<?php
+
+namespace {{ namespace }};
+
+class {{ class }} extends Base
+{
+
+    /**
+    * $var string[]
+    */
+    protected $appends = [];
+
+    /**
+     * @var string[]
+     */
+    protected $casts = [];
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = [];
+
+    /**
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = []) {
+        parent::__construct($attributes);
+    }
+
+}
