@@ -7,12 +7,17 @@ use Illuminate\Support\Facades\App;
 
 class CreateContact
 {
+    /**
+     * Handle the create contact action
+     * @todo Exception handling / abstract class generation
+     * @param Request $request
+     * @return Contact
+     */
     public function handle(Request $request) : Contact {
 
         $data = $request->validated();
         $data['on'] = App::make("App\\Models\\".$request->get('on'))::class;
 
-        // @TODO: fire exception if the above class doesn't exist
 
         return Contact::create(
             $data
