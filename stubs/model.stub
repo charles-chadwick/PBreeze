@@ -6,7 +6,7 @@ class {{ class }} extends Base
 {
 
     /**
-    * $var string[]
+    * @var string[]
     */
     protected $appends = [];
 
@@ -21,6 +21,12 @@ class {{ class }} extends Base
     protected $fillable = [];
 
     /**
+     * @var string[]
+     */
+    protected array $sort = [];
+
+    /**
+     * Construct the {{ class }}
      * @param array $attributes
      */
     public function __construct(array $attributes = []) {
