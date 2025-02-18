@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Schedules\CreateSchedule;
 use App\Http\Requests\StoreScheduleRequest;
 use App\Http\Requests\UpdateScheduleRequest;
 use App\Models\Schedule;
@@ -13,7 +14,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        //
+        return Schedule::with('users')->get();
     }
 
     /**
@@ -27,9 +28,9 @@ class ScheduleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreScheduleRequest $request)
+    public function store(StoreScheduleRequest $request, CreateSchedule $createSchedule)
     {
-        //
+        return $createSchedule->handle($request);
     }
 
     /**
