@@ -58,8 +58,8 @@ class ScheduleController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateScheduleRequest $request, Schedule $schedule) {
-        return $updateScheduleRequest->handle($request);
+    public function update(ScheduleRequest $request, Schedule $schedule) {
+
     }
 
     /**
