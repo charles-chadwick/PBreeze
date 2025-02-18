@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreScheduleRequest extends FormRequest {
+class ScheduleRequest extends BaseFormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -18,7 +18,7 @@ class StoreScheduleRequest extends FormRequest {
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array {
+    public function store(): array {
         return [
             "type"        => ['required', 'string'],
             "date"        => ['required', 'date'],
@@ -27,7 +27,7 @@ class StoreScheduleRequest extends FormRequest {
             "location"    => ['string'],
             "title"       => ['string'],
             "description" => ['string'],
-            'user_id'     => ['required']
+            'user_id'     => ['required', 'array']
         ];
     }
 }
