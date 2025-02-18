@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Http\Controllers;
 
@@ -11,10 +11,15 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller {
 
+    /**
+     * Show all the users
+     * @return Collection
+     */
     public function index(): Collection {
 
         // if the role is not present, then default to all but patients
         // if the role is set, then figure out which relationships to load based on that.
+        // @TODO: Move this into actions
         $relationships = [];
 
         $where_in = request('role', UserRole::allStaff());
@@ -30,6 +35,11 @@ class UserController extends Controller {
 
     }
 
+    /**
+     * Store the user
+     * @param StoreUserRequest $request
+     * @return User
+     */
     public function store(StoreUserRequest $request): User {
 
         // create the user
@@ -49,6 +59,12 @@ class UserController extends Controller {
         return $user->load('patient');
     }
 
+    /**
+     * Update the user
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return User
+     */
     public function update(UpdateUserRequest $request, User $user) {
 
         // create the user
@@ -66,7 +82,25 @@ class UserController extends Controller {
         return $user;
     }
 
+    /**
+     * Show the user
+     * @param User $user
+     * @return User
+     */
     public function show(User $user): User {
-        return $user->load('contacts');
+
+        if ($user->role === UserRole::Patient->value) {
+            $user->load('patient');
+        }
+        return $user;
+    }
+
+    /**
+     * Delete the user
+     * @param User $user
+     * @return bool|null
+     */
+    public function destroy(User $user) {
+        return $user->delete();
     }
 }
