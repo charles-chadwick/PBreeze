@@ -82,13 +82,29 @@ class User extends Base implements
     }
 
     /**
-     * Relationships
+     * Sort Fields
+     * @var array|string[]
+     */
+    protected array $sort_by = [
+        "first_name"  => "First Name",
+        "middle_name" => "Middle Name",
+        "last_name"   => "Last Name",
+        "email"       => "Email"
+    ];
+
+    /**
+     * Contacts
+     * @return MorphMany
+     */
+    public function contacts() : MorphMany {
+        return $this->morphMany(Contact::class, 'user', 'on', 'on_id');
+    }
+
+    /**
+     * Patient Relationship
+     * @return HasOne
      */
     public function patient(): HasOne {
         return $this->hasOne(Patient::class);
-    }
-
-    public function contacts() : MorphMany {
-        return $this->morphMany(Contact::class, 'user', 'on', 'on_id');
     }
 }
