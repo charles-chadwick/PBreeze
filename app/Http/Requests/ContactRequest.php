@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ContactRequest extends FormRequest {
+class ContactRequest extends BaseFormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -20,7 +20,7 @@ class ContactRequest extends FormRequest {
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array {
+    public function store(): array {
         return [
             'type'      => ['required', Rule::in(ContactType::cases())],
             'title'     => ['required', 'max:255'],

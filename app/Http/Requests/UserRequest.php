@@ -9,12 +9,12 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateUserRequest extends FormRequest {
+class UserRequest extends BaseFormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool {
-        return true;
+        return false;
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateUserRequest extends FormRequest {
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array {
+    public function store(): array {
         return [
             'status'      => ['required', Rule::in(UserStatus::cases())],
             'role'        => ['required', Rule::in(UserRole::cases())],
@@ -35,8 +35,7 @@ class UpdateUserRequest extends FormRequest {
                 Rule::in(PatientGender::cases())
             ],
             'dob'         => [
-                Rule::date()
-                    ->format('Y-m-d')
+                Rule::date()->format('Y-m-d')
             ],
         ];
     }
