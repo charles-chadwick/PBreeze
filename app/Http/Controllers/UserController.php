@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Users\CreateUserAction;
+use App\Actions\Users\UpdateUserAction;
 use App\Enums\UserRole;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 
 class UserController extends Controller {
 
@@ -40,23 +41,9 @@ class UserController extends Controller {
      * @param StoreUserRequest $request
      * @return User
      */
-    public function store(StoreUserRequest $request): User {
+    public function store(StoreUserRequest $request, CreateUserAction $createUserAction): User {
 
-        // create the user
-        $user = User::create($request->validated());
-
-        // if this is a patient, add the data
-        // @TODO: offload this to an event or action
-        if ($request->get('role') === UserRole::Patient->value) {
-            $user->load('patient');
-            $user->patient()
-                ->create([
-                    'dob'    => $request->validated('dob'),
-                    'gender' => $request->validated('gender'),
-                ]);
-        }
-
-        return $user->load('patient');
+        return $createUserAction->handle($request);
     }
 
     /**
@@ -65,21 +52,9 @@ class UserController extends Controller {
      * @param User $user
      * @return User
      */
-    public function update(UpdateUserRequest $request, User $user) {
+    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $updateUserAction): User {
 
-        // create the user
-        $user->update($request->validated());
-
-        // is this a patient? if so, update the patient stuff
-        if ($request->get('role') === UserRole::Patient->value) {
-            $user->load('patient');
-            $user->patient()->update([
-                'dob'    => $request->validated('dob'),
-                'gender' => $request->validated('gender'),
-            ]);
-        }
-
-        return $user;
+        return $updateUserAction->handle($user, $request);
     }
 
     /**
