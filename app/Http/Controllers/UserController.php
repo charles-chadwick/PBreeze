@@ -1,4 +1,5 @@
-<?php /** @noinspection ALL */
+<?php
+/** @noinspection ALL */
 
 namespace App\Http\Controllers;
 
@@ -14,6 +15,7 @@ class UserController extends Controller {
 
     /**
      * Show all the users
+     *
      * @return Collection
      */
     public function index(): Collection {
@@ -29,9 +31,9 @@ class UserController extends Controller {
         }
 
         return User::whereIn('role', collect($where_in))
-            ->with($relationships)
-            ->sort()
-            ->get();
+                   ->with($relationships)
+                   ->sort()
+                   ->get();
 
     }
 
@@ -48,6 +50,7 @@ class UserController extends Controller {
 
     /**
      * Update the user
+     *
      * @param UpdateUserRequest $request
      * @param User $user
      * @return User
@@ -59,6 +62,7 @@ class UserController extends Controller {
 
     /**
      * Show the user
+     *
      * @param User $user
      * @return User
      */
@@ -72,10 +76,11 @@ class UserController extends Controller {
 
     /**
      * Delete the user
+     *
      * @param User $user
      * @return bool|null
      */
-    public function destroy(User $user) {
+    public function destroy(User $user): bool|null {
         return $user->delete();
     }
 }
