@@ -3,7 +3,7 @@
 namespace {{ namespace }};
 use Illuminate\Http\Request;
 
-trait {{ class }}
+class {{ class }}
 {
     public function handle(Request $request) {
 
