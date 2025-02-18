@@ -20,6 +20,7 @@ class ContactController extends Controller {
         return Contact::with('user')
             ->where('on', User::class)
             ->where('on_id', request('user_id'))
+            ->orderBy(request('sort', ''))
             ->get();
     }
 

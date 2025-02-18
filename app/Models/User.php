@@ -97,7 +97,7 @@ class User extends Base implements
      * @return MorphMany
      */
     public function contacts() : MorphMany {
-        return $this->morphMany(Contact::class, 'user', 'on', 'on_id');
+        return $this->morphMany(Contact::class, 'contactable', 'on', 'on_id');
     }
 
     /**

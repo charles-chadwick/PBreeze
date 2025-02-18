@@ -30,17 +30,7 @@ class Contact extends Base {
         parent::__construct($attributes);
     }
 
-    public function user(): MorphTo {
-        return $this->morphTo("user", "on", "on_id");
-    }
-
-    public function addressExists($user, $address): bool {
-        return $this->where("on_id", $user)
-            ->where("address_1", $address['address_1'])
-            ->where("address_2", $address['address_2'])
-            ->where("city", $address['city'])
-            ->where("state", $address['state'])
-            ->where("zip", $address['zip'])
-            ->exists();
+    public function contactable(): MorphTo {
+        return $this->morphTo("contactable", "on", "on_id");
     }
 }
