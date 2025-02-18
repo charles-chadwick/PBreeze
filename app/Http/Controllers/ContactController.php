@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Http\Controllers;
 
@@ -13,40 +13,58 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
 class ContactController extends Controller {
+
     /**
      * Display a listing of the resource.
+     *
+     * @return Collection
      */
     public function index(): Collection {
-        return Contact::with('user')
-            ->where('on', User::class)
-            ->where('on_id', request('user_id'))
-            ->orderBy(request('sort', ''))
+
+        return Contact::sort()
+            ->with("contactable")
+            ->where("on", User::class)
+            ->where('on_id', request('on_id'))
             ->get();
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created contact in storage.
+     *
+     * @param StoreContactRequest $request
+     * @param CreateContact $createContact
+     * @return Contact
      */
     public function store(StoreContactRequest $request, CreateContact $createContact): Contact {
         return $createContact->handle($request);
     }
 
     /**
-     * Display the specified resource.
+     * Retrieve the specified contact from storage
+     *
+     * @param Contact $contact
+     * @return Contact
      */
     public function show(Contact $contact): Contact {
         return $contact->load('user');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified contact in storage.
+     *
+     * @param UpdateContactRequest $request
+     * @param Contact $contact
+     * @param UpdateContact $updateContact
+     * @return bool|null
      */
     public function update(UpdateContactRequest $request, Contact $contact, UpdateContact $updateContact): ?bool {
         return $updateContact->handle($request, $contact);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified contact from storage.
+     * @param Contact $contact
+     * @return bool|null
      */
     public function destroy(Contact $contact): ?bool {
         return $contact->delete();
