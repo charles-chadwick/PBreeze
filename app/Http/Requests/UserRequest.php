@@ -10,6 +10,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class UserRequest extends BaseFormRequest {
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -18,7 +19,7 @@ class UserRequest extends BaseFormRequest {
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules.
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
@@ -35,8 +36,18 @@ class UserRequest extends BaseFormRequest {
                 Rule::in(PatientGender::cases())
             ],
             'dob'         => [
-                Rule::date()->format('Y-m-d')
+                Rule::date()
+                    ->format('Y-m-d')
             ],
         ];
+    }
+
+    /**
+     * Store user rules
+     *
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
+    public function update(): array {
+        return $this->store();
     }
 }

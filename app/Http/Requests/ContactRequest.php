@@ -16,7 +16,7 @@ class ContactRequest extends BaseFormRequest {
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
@@ -32,5 +32,14 @@ class ContactRequest extends BaseFormRequest {
             'state'     => ['min:3', 'max:255'],
             'zip'       => ['min:3', 'max:255'],
         ];
+    }
+
+    /**
+     * Get the validation rules
+     *
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
+    public function update(): array {
+        return $this->store();
     }
 }
