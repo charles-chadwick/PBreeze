@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
+use AllowDynamicProperties;
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 
 class Base extends Model {
 
     use HasFactory, SoftDeletes;
     use Notifiable;
+
+    protected array $sort = [];
 
     public function __construct(array $attributes = []) {
         parent::__construct($attributes);
@@ -33,6 +37,10 @@ class Base extends Model {
             'created_by',
             'updated_by',
             'deleted_by'
+        ]);
+
+        $this->sort = array_replace($this->sort, [
+            'created_at' => 'Created At'
         ]);
     }
 
@@ -92,5 +100,14 @@ class Base extends Model {
     public function getDeletedAtHumanAttribute(): string {
         return Carbon::parse($this->attributes['deleted_at'])
             ->diffForHumans();
+    }
+
+    public function scopeSort(\Illuminate\Contracts\Database\Eloquent\Builder $query, Request $request) {
+        /**
+         * What needs to happen? We have to see if the sort variable is present
+         * IF not, choose the first out of the $sort array
+         */
+        $query->orderBy($request->get("sort", array_key_first($this->sort)), $request->get('dir', 'ASC'));
+        return $query;
     }
 }

@@ -85,7 +85,7 @@ class User extends Base implements
      * Sort Fields
      * @var array|string[]
      */
-    protected array $sort_by = [
+    protected array $sort = [
         "first_name"  => "First Name",
         "middle_name" => "Middle Name",
         "last_name"   => "Last Name",

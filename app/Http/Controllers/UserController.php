@@ -20,7 +20,6 @@ class UserController extends Controller {
 
         // if the role is not present, then default to all but patients
         // if the role is set, then figure out which relationships to load based on that.
-        // @TODO: Move this into actions
         $relationships = [];
 
         $where_in = request('role', UserRole::allStaff());
@@ -31,7 +30,7 @@ class UserController extends Controller {
 
         return User::whereIn('role', collect($where_in))
             ->with($relationships)
-            ->orderBy(request('sort', 'first_name'), request('dir', 'ASC'))
+            ->sort(request())
             ->get();
 
     }
