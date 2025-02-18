@@ -6,6 +6,7 @@ use App\Models\Schedule;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 
 class CreateSchedule {
 
@@ -20,9 +21,6 @@ class CreateSchedule {
          * Check the availability for this user/date/start-end
          * If bad, return error message
          */
-        if ((new UserIsScheduled())->handle($request)) {
-            return "NO!";
-        }
 
         // create the
         $schedule = Schedule::with('users')
