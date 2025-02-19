@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Schedules\CreateSchedule;
+use App\Actions\Schedules\StoreSchedule;
 use App\Actions\Schedules\UserIsScheduled;
 use App\Http\Requests\ScheduleRequest;
 use App\Models\Schedule;
@@ -26,10 +26,10 @@ class ScheduleController extends Controller {
      * Store a newly created schedule in storage.
      *
      * @param ScheduleRequest $request
-     * @param CreateSchedule $createSchedule
+     * @param StoreSchedule $createSchedule
      * @return RedirectResponse|Schedule
      */
-    public function store(ScheduleRequest $request, CreateSchedule $createSchedule): RedirectResponse|Schedule {
+    public function store(ScheduleRequest $request, StoreSchedule $createSchedule): RedirectResponse|Schedule {
 
         if ((new UserIsScheduled())->handle($request)) {
             $errors = new MessageBag();

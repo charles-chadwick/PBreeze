@@ -1,7 +1,7 @@
 <?php
 
 namespace {{ namespace }};
-use App\Actions\{{ model }}s\Create{{ model }};
+use App\Actions\{{ model }}s\Store{{ model }};
 use App\Actions\{{ model }}s\Update{{ model }};
 use App\Http\Requests\{{ model }}Request;
 use {{ namespacedModel }};
@@ -22,20 +22,20 @@ class {{ class }} extends Controller
     }
 
     /**
-      * Store a {{ modelVariable }} record
+      * Store a/an {{ modelVariable }} record
       *
       * @param {{ model }}Request $request
       * @return {{ model }}
       */
-     public function store({{ model }}Request $request, Create{{ model }} $create{{ model }}): {{ model }} {
+     public function store({{ model }}Request $request, Store{{ model }} $store{{ model }}): {{ model }} {
 
-         return $create{{ model }}->handle($request);
+         return $store{{ model }}->handle($request);
      }
 
      /**
-      * Update a {{ modelVariable }} record
+      * Update a/an {{ modelVariable }} record
       *
-      * @param Update{{ model }}Request $request
+      * @param {{ model }}Request $request
       * @param {{ model }} ${{ modelVariable }}
       * @return {{ model }}
       */
@@ -45,7 +45,7 @@ class {{ class }} extends Controller
      }
 
      /**
-      * Show a {{ modelVariable }} record
+      * Show a/an {{ modelVariable }} record
       *
       * @param {{ model }} ${{ modelVariable }}
       * @return {{ model }}
@@ -56,7 +56,7 @@ class {{ class }} extends Controller
      }
 
      /**
-      * Delete a {{ modelVariable }} record
+      * Delete a/an {{ modelVariable }} record
       *
       * @param {{ model }} ${{ modelVariable }}
       * @return bool|null

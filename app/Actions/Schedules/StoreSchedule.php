@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 
-class CreateSchedule {
+class StoreSchedule {
 
     /**
-     * Create the schedule
+     * Handle the store contact action
+     *
      * @param Request $request
      * @return mixed
      */

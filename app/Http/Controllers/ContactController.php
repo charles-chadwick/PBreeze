@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Contacts\CreateContact;
+use App\Actions\Contacts\StoreContact;
 use App\Actions\Contacts\UpdateContact;
 use App\Http\Requests\ContactRequest;
 use App\Http\Requests\UpdateContactRequest;
@@ -32,10 +32,10 @@ class ContactController extends Controller {
      * Store a newly created contact in storage.
      *
      * @param ContactRequest $request
-     * @param CreateContact $createContact
+     * @param StoreContact $createContact
      * @return Contact
      */
-    public function store(ContactRequest $request, CreateContact $createContact): Contact {
+    public function store(ContactRequest $request, StoreContact $createContact): Contact {
         return $createContact->handle($request);
     }
 

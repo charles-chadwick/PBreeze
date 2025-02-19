@@ -5,10 +5,10 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
-class CreateContact
+class StoreContact
 {
     /**
-     * Handle the create contact action
+     * Handle the store contact action
      * @todo Exception handling / abstract class generation
      * @param Request $request
      * @return Contact
