@@ -6,7 +6,7 @@ use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class CreateUser {
+class StoreUser {
 
     public function handle(Request $request) : User {
 

@@ -32,11 +32,11 @@ class ContactController extends Controller {
      * Store a newly created contact in storage.
      *
      * @param ContactRequest $request
-     * @param StoreContact $createContact
+     * @param StoreContact $storeContact
      * @return Contact
      */
-    public function store(ContactRequest $request, StoreContact $createContact): Contact {
-        return $createContact->handle($request);
+    public function store(ContactRequest $request, StoreContact $storeContact): Contact {
+        return $storeContact->handle($request);
     }
 
     /**

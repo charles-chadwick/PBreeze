@@ -18,12 +18,7 @@ class StoreSchedule {
      */
     public function handle(Request $request): mixed {
 
-        /**
-         * Check the availability for this user/date/start-end
-         * If bad, return error message
-         */
-
-        // create the
+        // create the record
         $schedule = Schedule::with('users')
             ->create($request->except('user_id'));
 
