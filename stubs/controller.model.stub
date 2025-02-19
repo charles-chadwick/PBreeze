@@ -37,9 +37,9 @@ class {{ class }} extends Controller
       *
       * @param {{ model }}Request $request
       * @param {{ model }} ${{ modelVariable }}
-      * @return {{ model }}
+      * @return bool
       */
-     public function update({{ model }}Request $request, {{ model }} ${{ modelVariable }}, Update{{ model }} $update{{ model }}): {{ model }} {
+     public function update({{ model }}Request $request, {{ model }} ${{ modelVariable }}, Update{{ model }} $update{{ model }}): bool {
 
          return $update{{ model }}->handle(${{ modelVariable }}, $request);
      }
