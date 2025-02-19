@@ -3,8 +3,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Users\CreateUserAction;
-use App\Actions\Users\UpdateUserAction;
+use App\Actions\Users\CreateUser;
+use App\Actions\Users\UpdateUser;
 use App\Enums\UserRole;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -43,9 +43,9 @@ class UserController extends Controller {
      * @param UserRequest $request
      * @return User
      */
-    public function store(UserRequest $request, CreateUserAction $createUserAction): User {
+    public function store(UserRequest $request, CreateUser $createUser): User {
 
-        return $createUserAction->handle($request);
+        return $createUser->handle($request);
     }
 
     /**
@@ -55,9 +55,9 @@ class UserController extends Controller {
      * @param User $user
      * @return User
      */
-    public function update(UserRequest $request, User $user, UpdateUserAction $updateUserAction): User {
+    public function update(UserRequest $request, User $user, UpdateUser $updateUser): User {
 
-        return $updateUserAction->handle($user, $request);
+        return $updateUser->handle($user, $request);
     }
 
     /**

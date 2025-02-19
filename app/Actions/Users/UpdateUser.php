@@ -6,7 +6,7 @@ use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UpdateUserAction {
+class UpdateUser {
 
     public function handle(Request $request, User $user): User {
         // create the user
