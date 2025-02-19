@@ -7,7 +7,6 @@ use App\Actions\Users\CreateUser;
 use App\Actions\Users\UpdateUser;
 use App\Enums\UserRole;
 use App\Http\Requests\UserRequest;
-use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
