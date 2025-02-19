@@ -2,27 +2,39 @@
 
 namespace {{ namespace }};
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class {{ class }} extends FormRequest
+class {{ class }} extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the store validation rules
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function store(): array
     {
         return [
             //
         ];
+    }
+
+    /**
+     * Get the update validation rules
+     *
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
+    public function update(): array
+    {
+        return $this->store(); // change this in case the rules are different
     }
 }

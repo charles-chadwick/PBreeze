@@ -1,50 +1,68 @@
 <?php
 
 namespace {{ namespace }};
-
+use App\Actions\{{ model }}s\Create{{ model }};
+use App\Actions\{{ model }}s\Update{{ model }};
+use App\Http\Requests\{{ model }}Request;
 use {{ namespacedModel }};
 use {{ rootNamespace }}Http\Controllers\Controller;
 use {{ namespacedRequests }}
+use Illuminate\Database\Eloquent\Collection;
 
 class {{ class }} extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show a listing of all {{ model }}
+     *
+     * @return Collection
      */
-    public function index()
-    {
-        //
+    public function index() {
+
+        return {{ model }}::get();
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store({{ storeRequest }} $request)
-    {
-        //
-    }
+      * Store a {{ modelVariable }} record
+      *
+      * @param {{ model }}Request $request
+      * @return {{ model }}
+      */
+     public function store({{ model }}Request $request, Create{{ model }} $create{{ model }}): {{ model }} {
 
-    /**
-     * Display the specified resource.
-     */
-    public function show({{ model }} ${{ modelVariable }})
-    {
-        //
-    }
+         return $create{{ model }}->handle($request);
+     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update({{ updateRequest }} $request, {{ model }} ${{ modelVariable }})
-    {
-        //
-    }
+     /**
+      * Update a {{ modelVariable }} record
+      *
+      * @param Update{{ model }}Request $request
+      * @param {{ model }} ${{ modelVariable }}
+      * @return {{ model }}
+      */
+     public function update({{ model }}Request $request, {{ model }} ${{ modelVariable }}, Update{{ model }} $update{{ model }}): {{ model }} {
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy({{ model }} ${{ modelVariable }})
-    {
-        //
-    }
+         return $update{{ model }}->handle(${{ modelVariable }}, $request);
+     }
+
+     /**
+      * Show a {{ modelVariable }} record
+      *
+      * @param {{ model }} ${{ modelVariable }}
+      * @return {{ model }}
+      */
+     public function show({{ model }} ${{ modelVariable }}): {{ model }} {
+
+         return ${{ modelVariable }};
+     }
+
+     /**
+      * Delete a {{ modelVariable }} record
+      *
+      * @param {{ model }} ${{ modelVariable }}
+      * @return bool|null
+      */
+     public function destroy({{ model }} ${{ modelVariable }}): bool|null {
+
+         return ${{ modelVariable }}->delete();
+     }
 }
