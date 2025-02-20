@@ -37,7 +37,10 @@ class Base extends Model {
         $this->fillable = array_merge($this->fillable, [
             'created_by',
             'updated_by',
-            'deleted_by'
+            'deleted_by',
+			'created_at',
+            'updated_at',
+            'deleted_at'
         ]);
 
         $this->sort = array_replace($this->sort, [

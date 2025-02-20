@@ -19,16 +19,6 @@ class StoreSchedule {
     public function handle(Request $request): mixed {
 
         // create the record
-        $schedule = Schedule::with('users')
-            ->create($request->except('user_id'));
-
-        // add the users
-        $schedule->users()
-            ->attach($request->get('user_id'), [
-                'created_by' => auth()->id(),
-                'created_at' => now()
-            ]);
-
-        return $schedule;
+		return Schedule::create($request->validated());
     }
 }

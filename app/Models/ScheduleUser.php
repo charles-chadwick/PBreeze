@@ -24,6 +24,11 @@ class ScheduleUser extends Base
      * @var array<string>|bool
      */
     protected $guarded = [];
+	
+	protected $fillable = [
+		'schedule_id',
+		'user_id'
+	];
 
     public function __construct(array $attributes = []) {
         parent::__construct($attributes);

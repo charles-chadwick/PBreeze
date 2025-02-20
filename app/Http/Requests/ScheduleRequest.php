@@ -28,7 +28,7 @@ class ScheduleRequest extends BaseFormRequest {
             "location"    => ['string'],
             "title"       => ['string'],
             "description" => ['string'],
-            'user_id'     => ['required', 'array', 'min:1']
+            'user_id'     => ['required']
         ];
     }
 
