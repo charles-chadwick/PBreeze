@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Appointment;
 use App\Models\Contact;
+use App\Models\Encounter;
 use App\Models\Patient;
 use App\Models\Schedule;
 use App\Models\ScheduleUser;
@@ -38,5 +39,6 @@ class AppServiceProvider extends ServiceProvider {
 		Schedule::observe([ ModelObserver::class ]);
 		ScheduleUser::observe([ ModelObserver::class ]);
 		Appointment::observe([ ModelObserver::class ]);
+		Encounter::observe([ ModelObserver::class ]);
 	}
 }
