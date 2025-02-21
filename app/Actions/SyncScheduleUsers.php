@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Schedules;
+namespace App\Actions;
 use App\Models\Schedule;
 use App\Models\ScheduleUser;
 use Illuminate\Http\Request;

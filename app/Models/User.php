@@ -11,6 +11,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -26,9 +27,11 @@ class User extends Base implements
 	AuthenticatableContract,
 	AuthorizableContract,
 	CanResetPasswordContract {
+	
 	use \Illuminate\Auth\Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
 	
-	public function __construct(array $attributes = []) {
+	public function __construct (array $attributes = []) {
+		
 		parent::__construct($attributes);
 	}
 	
@@ -75,10 +78,12 @@ class User extends Base implements
 		'full_name'
 	];
 	
-	public function fullName(): Attribute {
+	public function fullName (): Attribute {
+		
 		return Attribute::make(
 			get: function ($value, $attribute) {
-				return $attribute['first_name'] . " " . $attribute['last_name'];
+				
+				return $attribute[ 'first_name' ] . " " . $attribute[ 'last_name' ];
 			}
 		);
 	}
@@ -100,7 +105,8 @@ class User extends Base implements
 	 *
 	 * @return MorphMany
 	 */
-	public function contacts(): MorphMany {
+	public function contacts (): MorphMany {
+		
 		return $this->morphMany(Contact::class, 'contactable', 'on', 'on_id');
 	}
 	
@@ -109,7 +115,8 @@ class User extends Base implements
 	 *
 	 * @return HasOne
 	 */
-	public function patient(): HasOne {
+	public function patient (): HasOne {
+		
 		return $this->hasOne(Patient::class);
 	}
 	
@@ -118,7 +125,8 @@ class User extends Base implements
 	 *
 	 * @return BelongsToMany
 	 */
-	public function schedules(): BelongsToMany {
+	public function schedules (): BelongsToMany {
+		
 		return $this->belongsToMany(Schedule::class, "schedule_users")
 					->using(ScheduleUser::class)
 					->withPivot(
@@ -133,4 +141,24 @@ class User extends Base implements
 					)
 					->withTimestamps();
 	}
+	
+	/**
+	 * @param Builder $query
+	 * @param         $role
+	 * @return Builder
+	 */
+	public function scopeByRole (Builder $query, $role): Builder {
+		
+		//  load data by role
+		if ($role === UserRole::Patient->value) {
+			$query->where('role', UserRole::Patient->value)
+				  ->with('patient');
+		}
+		else {
+			$query->whereIn('role', compact($role == null ? UserRole::allStaff() : $role));
+		}
+		
+		return $query;
+	}
+	
 }

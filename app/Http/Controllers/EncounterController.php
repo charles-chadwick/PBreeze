@@ -18,40 +18,37 @@ class EncounterController extends Controller {
 	 */
 	public function index (): Collection {
 		
-		return Encounter::with(['patient', 'appointment'])->get();
+		return Encounter::with([ 'patient', 'appointment' ])
+						->get();
 	}
 	
 	/**
 	 * Store a/an encounter record
 	 *
 	 * @param EncounterRequest $request
-	 *
 	 * @return Encounter
 	 */
-	public function store (EncounterRequest $request, StoreEncounter $storeEncounter): Encounter {
+	public function store (EncounterRequest $request): Encounter {
 		
-		return $storeEncounter->handle($request);
+		return Encounter::create($request->validated());
 	}
 	
 	/**
 	 * Update a/an encounter record
-	 *w
 	 *
 	 * @param EncounterRequest $request
 	 * @param Encounter        $encounter
-	 *
 	 * @return bool
 	 */
-	public function update (EncounterRequest $request, Encounter $encounter, UpdateEncounter $updateEncounter): bool {
+	public function update (EncounterRequest $request, Encounter $encounter): bool {
 		
-		return $updateEncounter->handle($request, $encounter);
+		return $encounter->update($request->validated());
 	}
 	
 	/**
 	 * Show a/an encounter record
 	 *
 	 * @param Encounter $encounter
-	 *
 	 * @return Encounter
 	 */
 	public function show (Encounter $encounter): Encounter {
@@ -63,7 +60,6 @@ class EncounterController extends Controller {
 	 * Delete a/an encounter record
 	 *
 	 * @param Encounter $encounter
-	 *
 	 * @return bool|null
 	 */
 	public function destroy (Encounter $encounter): bool|null {

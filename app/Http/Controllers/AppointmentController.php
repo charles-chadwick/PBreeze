@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Appointments\PatientHasAppointment;
-use App\Actions\Appointments\StoreAppointment;
-use App\Actions\Appointments\UpdateAppointment;
+use App\Actions\PatientHasAppointment;
 use App\Http\Requests\AppointmentRequest;
 use App\Models\Appointment;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\MessageBag;
 
 class AppointmentController extends Controller {
 	
@@ -26,14 +21,15 @@ class AppointmentController extends Controller {
 	}
 	
 	/**
-	 * Store a/an appointment record
+	 * Store an appointment record
 	 *
 	 * @param AppointmentRequest $request
 	 *
 	 * @return Appointment|RedirectResponse
 	 */
-	public function store (AppointmentRequest $request, StoreAppointment $storeAppointment): Appointment|RedirectResponse {
+	public function store (AppointmentRequest $request): Appointment|RedirectResponse {
 		
+		// check to see if this patient has an appointment
 		if (( new PatientHasAppointment() )->handle($request)) {
 			return redirect()
 				->back()
@@ -42,29 +38,26 @@ class AppointmentController extends Controller {
 				]);
 		}
 		
-		return $storeAppointment->handle($request);
-		
+		return Appointment::create($request->validated());
 	}
 	
 	/**
-	 * Update a/an appointment record
+	 * Update an appointment record
 	 *
 	 * @param AppointmentRequest $request
 	 * @param Appointment        $appointment
-	 * @param UpdateAppointment  $updateAppointment
 	 *
 	 * @return bool
 	 */
-	public function update (AppointmentRequest $request, Appointment $appointment, UpdateAppointment $updateAppointment): bool {
+	public function update (AppointmentRequest $request, Appointment $appointment): bool {
 		
-		return $updateAppointment->handle($appointment, $request);
+		return $appointment->update($request->validated());
 	}
 	
 	/**
-	 * Show a/an appointment record
+	 * Show an appointment record
 	 *
 	 * @param Appointment $appointment
-	 *
 	 * @return Appointment
 	 */
 	public function show (Appointment $appointment): Appointment {
@@ -73,10 +66,9 @@ class AppointmentController extends Controller {
 	}
 	
 	/**
-	 * Delete a/an appointment record
+	 * Delete an appointment record
 	 *
 	 * @param Appointment $appointment
-	 *
 	 * @return bool|null
 	 */
 	public function destroy (Appointment $appointment): bool|null {

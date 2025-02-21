@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Appointments;
+namespace App\Actions;
 use App\Enums\AppointmentStatus;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
