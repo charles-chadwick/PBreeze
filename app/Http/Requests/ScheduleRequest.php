@@ -22,9 +22,8 @@ class ScheduleRequest extends BaseFormRequest {
     public function store(): array {
         return [
             "type"        => ['required', 'string'],
-            "date"        => ['required', 'date'],
-            "start"       => ['required', 'date_format:H:i'],
-            "end"         => ['required', 'date_format:H:i'],
+			"start"       => [ 'required', 'date' ],
+			"end"         => [ 'required', 'date' ],
             "location"    => ['string'],
             "title"       => ['string'],
             "description" => ['string'],

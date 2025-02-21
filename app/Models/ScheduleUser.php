@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Concerns\AsPivot;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
@@ -33,4 +34,12 @@ class ScheduleUser extends Base
     public function __construct(array $attributes = []) {
         parent::__construct($attributes);
     }
+	
+	public function schedule(): BelongsTo {
+		return $this->belongsTo(Schedule::class);
+	}
+	
+	public function user(): BelongsTo {
+		return $this->belongsTo(User::class);
+	}
 }

@@ -14,4 +14,8 @@ enum AppointmentStatus : string
     case Pending = "Pending";
     case Rescheduled = "Rescheduled";
     case Scheduled = "Scheduled";
+	
+	public static function available(): array {
+		return [self::Cancelled->value, self::Rescheduled->value];
+	}
 }

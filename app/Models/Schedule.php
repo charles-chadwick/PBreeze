@@ -22,7 +22,6 @@ class Schedule extends Base {
 	 */
 	protected $fillable = [
 		"type",
-		"date",
 		"start",
 		"end",
 		"location",
@@ -35,7 +34,6 @@ class Schedule extends Base {
 	 */
 	protected array $sort = [
 		"type"        => "Type",
-		"date"        => "Date",
 		"start"       => "Start Time",
 		"end"         => "End Time",
 		"location"    => "Location",
@@ -50,6 +48,13 @@ class Schedule extends Base {
 	 */
 	public function __construct(array $attributes = []) {
 		parent::__construct($attributes);
+	}
+	
+	/**
+	 * An appointment that belongs to this thingy
+	 */
+	public function appointment(): HasMany {
+		return $this->hasMany(Appointment::class);
 	}
 	
 	/**

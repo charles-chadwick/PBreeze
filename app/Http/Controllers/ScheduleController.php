@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Schedules\StoreSchedule;
 use App\Actions\Schedules\SyncScheduleUsers;
 use App\Actions\Schedules\UpdateSchedule;
-use App\Actions\Schedules\UserIsScheduled;
+use App\Actions\Schedules\IsUserScheduled;
 use App\Http\Requests\ScheduleRequest;
 use App\Models\Schedule;
 use App\Models\User;
