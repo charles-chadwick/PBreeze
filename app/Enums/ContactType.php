@@ -2,9 +2,13 @@
 
 namespace App\Enums;
 
-enum ContactType : string
-{
-    case Home = 'Home';
-    case Work = 'Work';
-    case Business = 'Business';
+/**
+ * Types of contacts
+ */
+enum ContactType: string {
+	
+	case Home     = 'Home';
+	case Work     = 'Work';
+	case Business = 'Business';
+	
 }
