@@ -147,7 +147,7 @@ class User extends Base implements
 	 * @param         $role
 	 * @return Builder
 	 */
-	public function scopeByRole (Builder $query, $role): Builder {
+	public function scopeByRole (Builder $query, $role = null): Builder {
 		
 		//  load data by role
 		if ($role === UserRole::Patient->value) {
@@ -155,7 +155,7 @@ class User extends Base implements
 				  ->with('patient');
 		}
 		else {
-			$query->whereIn('role', compact($role == null ? UserRole::allStaff() : $role));
+			$query->whereIn('role', $role == null ? UserRole::allStaff() : compact($role));
 		}
 		
 		return $query;
