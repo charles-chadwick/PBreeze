@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         //(new UserSeeder())->run();
-		(new ScheduleSeeder())->run();
+		// (new ScheduleSeeder())->run();
+		(new EncounterSeeder())->run();
     }
 }

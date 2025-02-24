@@ -4,6 +4,6 @@ namespace App\Enums;
 
 enum EncounterStatus : string
 {
-	case Unsigned = "Un-signed";
+	case Unsigned = "Unsigned";
 	case Signed = "Signed";
 }
