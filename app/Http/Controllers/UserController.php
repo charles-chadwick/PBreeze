@@ -9,6 +9,7 @@ use App\Enums\UserRole;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\View\View;
 
 class UserController extends Controller {
 	
@@ -17,11 +18,13 @@ class UserController extends Controller {
 	 *
 	 * @return Collection
 	 */
-	public function index (): Collection {
+	public function index (): View {
 		
-		return User::byRole(request('role'))
+		$users = User::byRole(request('role'))
 				   ->sort()
 				   ->get();
+		
+		return view('users.index', compact('users'));
 		
 	}
 	
